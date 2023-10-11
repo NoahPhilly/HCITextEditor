@@ -1,25 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, {Component} from "react";
+import TextEditor from "./components/TextEditor/index.jsx";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Boilerplate React.js Application
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return(<TextEditor/>)
 }
-
 export default App;
