@@ -1,10 +1,9 @@
 import React from "react";
 import { useRef, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
-import AddIcCallIcon from '@mui/icons-material/AddIcCall';
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import {Button} from '@mui/material'
 import commands from "../../utils/commands";
+import { red } from "@mui/material/colors";
 
 
 
@@ -12,11 +11,20 @@ const TextEditor = () => {
    const editorCommands = commands;
    const { transcript, resetTranscript } = useSpeechRecognition({ editorCommands });
    const [isListening, setIsListening] = useState(false);
+   const [concurrentText, setConcurrentText] = useState('');
    const microphoneRef = useRef(null);
+   
+
+   const editorStyle = {
+      width: '100%',
+      height: '100vw',
+      fontSize: '50px'
+      
+   };
 
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       return (
-        <div className="mircophone-container">
+        <div className="microphone-container">
           Please use Google Chrome to use this appliction!
         </div>
       );
@@ -36,6 +44,7 @@ const TextEditor = () => {
     const handleReset = () => {
       stopRecording();
       resetTranscript();
+      setConcurrentText('');
     };
     return (
       <div className="microphone-wrapper">
@@ -45,27 +54,29 @@ const TextEditor = () => {
             ref={microphoneRef}
             onClick={handleUserInput}
           >
-            <img src={AddIcCallIcon} />
-          </div>
-          <div className="microphone-status">
-            {isListening ? "Writing from Speech Input!" : "Click to start editor!"}
+            {!isListening && <Button className="Button" variant="contained">Start Transcription</Button>}
           </div>
           {isListening && 
-            <Button className="microphone-stop btn" onClick={stopRecording}>
+            <Button className="Button" onClick={stopRecording} variant="contained" sx={{color: red}}>
               Stop
             </Button>
           }
           {!isListening && transcript && 
-            <Button className="microphone-reset btn" onClick={handleReset}>
+            <Button className="Button" variant="contained" onClick={handleReset}>
               Reset
             </Button>
           }
         </div>
-        {transcript && (
+        
           <div className="microphone-result-container">
-            <TextareaAutosize className="microphone-result-text" value={transcript}></TextareaAutosize>
+            <textarea 
+              style={editorStyle} 
+              className="microphone-result-text" 
+              value={concurrentText.length === 0 ? transcript : concurrentText} 
+              onChange={(e) => setConcurrentText(e.target.value)}>
+            </textarea>
           </div>
-        )}
+        
       </div>
     );
 };
