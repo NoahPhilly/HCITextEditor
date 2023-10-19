@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
-import {Button} from '@mui/material'
+import {Button, Paper} from '@mui/material'
 import commands from "../../utils/commands";
 import { red } from "@mui/material/colors";
 
@@ -29,6 +29,7 @@ const TextEditor = () => {
         </div>
       );
     }
+
     const handleUserInput = () => {
       setIsListening(true);
       microphoneRef.current.classList.add("listening");
@@ -36,18 +37,39 @@ const TextEditor = () => {
         continuous: true,
       });
     };
+
     const stopRecording = () => {
       setIsListening(false);
       microphoneRef.current.classList.remove("listening");
       SpeechRecognition.stopListening();
     };
+
     const handleReset = () => {
       stopRecording();
       resetTranscript();
       setConcurrentText('');
     };
+
+    const downloadFile = async () => {
+      
+      let inputtedName = prompt("Input a file-name!");
+
+      if (inputtedName.trim().length > 1){
+        const link = document.createElement("a");
+        const content = concurrentText.length === 0 ? transcript : concurrentText;
+        const generatedFile = new Blob([content], { type: 'text/plain' });
+        link.href = URL.createObjectURL(generatedFile);
+        link.download = inputtedName;
+        link.click();
+        URL.revokeObjectURL(link.href);
+    } else {
+        alert("You cannot have an empty file name!")
+    }
+ };
+    
+    
     return (
-      <div className="microphone-wrapper">
+      <Paper className="microphone-wrapper" variant="outlined" elevation={0}>
         <div className="mircophone-container">
           <div
             className="microphone-icon-container"
@@ -66,8 +88,12 @@ const TextEditor = () => {
               Reset
             </Button>
           }
+          {!isListening && transcript && 
+            <Button className="Button" variant="contained" onClick={downloadFile}>
+              Download Text
+            </Button>
+          }
         </div>
-        
           <div className="microphone-result-container">
             <textarea 
               style={editorStyle} 
@@ -77,7 +103,7 @@ const TextEditor = () => {
             </textarea>
           </div>
         
-      </div>
+      </Paper>
     );
 };
 
