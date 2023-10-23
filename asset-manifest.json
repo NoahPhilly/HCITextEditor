@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/HCITextEditor/static/css/main.e6c13ad2.css",
+    "main.js": "/HCITextEditor/static/js/main.187718c7.js",
+    "static/js/787.291edf26.chunk.js": "/HCITextEditor/static/js/787.291edf26.chunk.js",
+    "index.html": "/HCITextEditor/index.html",
+    "main.e6c13ad2.css.map": "/HCITextEditor/static/css/main.e6c13ad2.css.map",
+    "main.187718c7.js.map": "/HCITextEditor/static/js/main.187718c7.js.map",
+    "787.291edf26.chunk.js.map": "/HCITextEditor/static/js/787.291edf26.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.187718c7.js"
+  ]
+}
