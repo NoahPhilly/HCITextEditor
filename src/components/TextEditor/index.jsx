@@ -2,14 +2,27 @@ import React from "react";
 import { useRef, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import {Button, Paper} from '@mui/material'
-import commands from "../../utils/commands";
 import { red } from "@mui/material/colors";
 
 
-
 const TextEditor = () => {
-   const editorCommands = commands;
-   const { transcript, resetTranscript } = useSpeechRecognition({ editorCommands });
+   
+  const commands = [
+    {
+      command: "reset",
+      callback: () => {
+        handleReset();
+      }
+    },
+    {
+      command: "download file",
+      callback: () => {
+        downloadFile();
+      }
+    }
+  ];
+  
+   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
    const [isListening, setIsListening] = useState(false);
    const [concurrentText, setConcurrentText] = useState('');
    const microphoneRef = useRef(null);
@@ -51,10 +64,10 @@ const TextEditor = () => {
     };
 
     const downloadFile = async () => {
-      
+
       let inputtedName = prompt("Input a file-name!");
 
-      if (inputtedName.trim().length > 1){
+      if (inputtedName || inputtedName.trim().length > 1){
         const link = document.createElement("a");
         const content = concurrentText.length === 0 ? transcript : concurrentText;
         const generatedFile = new Blob([content], { type: 'text/plain' });
