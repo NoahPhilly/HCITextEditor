@@ -67,7 +67,7 @@ const TextEditor = () => {
 
       let inputtedName = prompt("Input a file-name!");
 
-      if (inputtedName || inputtedName.trim().length > 1){
+      if (inputtedName != null && inputtedName.trim().length > 1){
         const link = document.createElement("a");
         const content = concurrentText.length === 0 ? transcript : concurrentText;
         const generatedFile = new Blob([content], { type: 'text/plain' });
@@ -75,8 +75,10 @@ const TextEditor = () => {
         link.download = inputtedName;
         link.click();
         URL.revokeObjectURL(link.href);
+    } else if (inputtedName === null) {
+       return;
     } else {
-        alert("You cannot have an empty file name!")
+      alert('You cannot have an empty file name!');
     }
  };
     
