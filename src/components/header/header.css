@@ -1,0 +1,37 @@
+.header {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5em; /* Adjust font size as needed */
+}
+
+.divider {
+    border-bottom: 2px solid #333; /* Adjust color as needed */
+    margin: 10px 0; /* Adjust spacing above and below the line */
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the space between icons */
+    padding: 0px;
+}
+
+/* If you need to style the icons specifically */
+.icon-container .MuiSvgIcon-root {
+    font-size: 4rem; /* Adjust icon size as needed */
+}
+
+.icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.icon-button .icon {
+    fill: currentColor; /* If using SVG */
+}
