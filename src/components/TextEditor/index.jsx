@@ -1,8 +1,11 @@
 import React from "react";
 import { useRef, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
-import {Button, Paper} from '@mui/material'
-import { red } from "@mui/material/colors";
+import {Paper} from '@mui/material'
+import KeyboardVoiceOutlinedIcon from '@mui/icons-material/KeyboardVoiceOutlined';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import StopCircleIcon from '@mui/icons-material/StopCircle';
 
 
 const TextEditor = () => {
@@ -84,40 +87,34 @@ const TextEditor = () => {
     
     
     return (
-      <Paper className="microphone-wrapper" variant="outlined" elevation={0}>
-        <div className="mircophone-container">
-          <div
-            className="microphone-icon-container"
-            ref={microphoneRef}
-            onClick={handleUserInput}
-          >
-            {!isListening && <Button className="Button" variant="contained">Start Transcription</Button>}
-          </div>
+      <Paper className="microphone-wrapper" variant="elevation" elevation={0}>
+        <div className="icon-container">
+          {!isListening && <button className="icon-button" title="Start Recording" ref={microphoneRef} onClick={handleUserInput}><KeyboardVoiceOutlinedIcon/></button>}
+          
           {isListening && 
-            <Button className="Button" onClick={stopRecording} variant="contained" sx={{color: red}}>
-              Stop
-            </Button>
+            <button title="Stop" className="icon-button" ref={microphoneRef} onClick={stopRecording} variant="contained">
+              <StopCircleIcon/>
+            </button>
           }
           {!isListening && transcript && 
-            <Button className="Button" variant="contained" onClick={handleReset}>
-              Reset
-            </Button>
+            <button title="Delete" className="icon-button" onClick={handleReset}>
+              <DeleteForeverOutlinedIcon/>
+            </button>
           }
           {!isListening && transcript && 
-            <Button className="Button" variant="contained" onClick={downloadFile}>
-              Download Text
-            </Button>
+            <button title="Download" className="icon-button" onClick={downloadFile}>
+              <FileDownloadOutlinedIcon/>
+            </button>
           }
         </div>
-          <div className="microphone-result-container">
-            <textarea 
-              style={editorStyle} 
-              className="microphone-result-text" 
-              value={concurrentText.length === 0 ? transcript : concurrentText} 
-              onChange={(e) => setConcurrentText(e.target.value)}>
-            </textarea>
-          </div>
-        
+        <div className="microphone-result-container">
+          <textarea 
+            style={editorStyle} 
+            className="microphone-result-text" 
+            value={concurrentText.length === 0 ? transcript : concurrentText} 
+            onChange={(e) => setConcurrentText(e.target.value)}>
+          </textarea>
+        </div>
       </Paper>
     );
 };
