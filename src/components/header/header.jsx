@@ -19,9 +19,6 @@ const Header = () => {
                 <button title='Reset' className='icon-button'>
                     <DeleteForeverOutlinedIcon />
                 </button>
-                {/* <KeyboardVoiceOutlinedIcon />
-                <FileDownloadOutlinedIcon /> 
-                <DeleteForeverOutlinedIcon /> */}
             </div>
             <div className="divider"></div>
         </div>

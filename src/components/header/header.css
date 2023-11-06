@@ -5,22 +5,21 @@
 
 .header h1 {
     margin: 0;
-    font-size: 1.5em; /* Adjust font size as needed */
+    font-size: 1.5em;
 }
 
 .divider {
-    border-bottom: 2px solid #333; /* Adjust color as needed */
-    margin: 10px 0; /* Adjust spacing above and below the line */
+    border-bottom: 1.7px solid #333; /* Adjust size and color as needed */
+    margin: 10px 0; /* Spacing above and below the line */
 }
 
 .icon-container {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Adjust the space between icons */
+    gap: 20px; /* Space between icons */
     padding: 0px;
 }
 
-/* If you need to style the icons specifically */
 .icon-container .MuiSvgIcon-root {
     font-size: 4rem; /* Adjust icon size as needed */
 }
@@ -29,7 +28,7 @@
     border: none;
     background: none;
     cursor: pointer;
-    padding: 5px;
+    padding: 0px;
 }
 
 .icon-button .icon {
