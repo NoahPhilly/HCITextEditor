@@ -33,7 +33,7 @@ Deploys the application to GitHub Pages into the separate `gh-pages` branch.
 
 ## Milestone 1
 
-- Added intial skeleton overall application
+- Added intial skeleton for the application
 - Installed associated `npm` dependencies and packages
 - Set-up base functionality for Speech to Text functionality
 
